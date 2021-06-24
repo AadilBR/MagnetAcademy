@@ -1,2 +1,1 @@
 # MagnetAcademy
-# MagnetAcademy
