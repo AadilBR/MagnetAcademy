@@ -68,7 +68,7 @@ describe('MagnetAcademy', function () {
       await expect(magnetAcademy.connect(lambdaUser).grantRole(ADMIN, academyAdmin2.address),
         'a lambda user can not add a new admin'
       // eslint-disable-next-line max-len
-      ).to.be.revertedWith('AccessControl: account 0x15d34aaf54267db7d7c367839aaf71a00a2c6a65 is missing role 0xecb1480bcecc190d1f053c320b46adf83778c17c198b156c5333dcb034c2209e');
+      ).to.be.revertedWith(`AccessControl: account ${lambdaUser.address.toLowerCase()} is missing role ${RECTOR.toLowerCase()}`);
       // an admin can not add a new admin
       await expect(
         magnetAcademy.connect(academyAdmin1).grantRole(ADMIN, academyAdmin2.address),
@@ -94,12 +94,12 @@ describe('MagnetAcademy', function () {
       await expect(
         magnetAcademy.connect(lambdaUser).revokeRole(ADMIN, academyAdmin2.address),
         'a lambda user can not revoke an admin'
-      ).to.be.revertedWith('AccessControl: account 0x15d34aaf54267db7d7c367839aaf71a00a2c6a65 is missing role 0xecb1480bcecc190d1f053c320b46adf83778c17c198b156c5333dcb034c2209e');
+      ).to.be.revertedWith(`AccessControl: account ${lambdaUser.address.toLowerCase()} is missing role ${RECTOR.toLowerCase()}`);
       // an admin can not revoke an admin
       await expect(
         magnetAcademy.connect(academyAdmin1).revokeRole(ADMIN, academyAdmin2.address),
         'an admin can not revoke an admin'
-      ).to.be.revertedWith('AccessControl: account 0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc is missing role 0xecb1480bcecc190d1f053c320b46adf83778c17c198b156c5333dcb034c2209e');
+      ).to.be.revertedWith(`AccessControl: account ${academyAdmin1.address.toLowerCase()} is missing role ${RECTOR.toLowerCase()}`);
     });
   });
 
